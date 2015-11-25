@@ -103,12 +103,12 @@ describe('alt.passaporte-procuracao', function() {
   describe('_fazProcuracao', function() {
     it('não deve fazer a busca, token não informado', function() {
       var _token = undefined;
-      var _idAssinante = 1;
+      var _idProcurador = 1;
       var _idProdutoProcurador = 2;
       var _idProdutoOutorgante = 3;
 
       _AltPassaporteProcuracaoService
-        ._fazProcuracao(_token, _idAssinante, _idProdutoProcurador, _idProdutoOutorgante)
+        ._fazProcuracao(_token, _idProcurador, _idProdutoProcurador, _idProdutoOutorgante)
         .then(function() {
           expect(true).toBe(false);
         })
@@ -121,14 +121,14 @@ describe('alt.passaporte-procuracao', function() {
       _rootScope.$digest();
     });
 
-    it('não deve fazer a busca, idAssinante não informado', function() {
+    it('não deve fazer a busca, idProcurador não informado', function() {
       var _token = 1;
-      var _idAssinante = undefined;
+      var _idProcurador = undefined;
       var _idProdutoProcurador = 2;
       var _idProdutoOutorgante = 3;
 
       _AltPassaporteProcuracaoService
-        ._fazProcuracao(_token, _idAssinante, _idProdutoProcurador, _idProdutoOutorgante)
+        ._fazProcuracao(_token, _idProcurador, _idProdutoProcurador, _idProdutoOutorgante)
         .then(function() {
           expect(true).toBe(false);
         })
@@ -143,12 +143,12 @@ describe('alt.passaporte-procuracao', function() {
 
     it('não deve fazer a busca, idProdutoProcurador não informado', function() {
       var _token = 1;
-      var _idAssinante = 2;
+      var _idProcurador = 2;
       var _idProdutoProcurador = undefined;
       var _idProdutoOutorgante = 3;
 
       _AltPassaporteProcuracaoService
-        ._fazProcuracao(_token, _idAssinante, _idProdutoProcurador, _idProdutoOutorgante)
+        ._fazProcuracao(_token, _idProcurador, _idProdutoProcurador, _idProdutoOutorgante)
         .then(function() {
           expect(true).toBe(false);
         })
@@ -163,12 +163,12 @@ describe('alt.passaporte-procuracao', function() {
 
     it('não deve fazer a busca, idProdutoOutorgante não informado', function() {
       var _token = 1;
-      var _idAssinante = 2;
+      var _idProcurador = 2;
       var _idProdutoProcurador = 3;
       var _idProdutoOutorgante = undefined;
 
       _AltPassaporteProcuracaoService
-        ._fazProcuracao(_token, _idAssinante, _idProdutoProcurador, _idProdutoOutorgante)
+        ._fazProcuracao(_token, _idProcurador, _idProdutoProcurador, _idProdutoOutorgante)
         .then(function() {
           expect(true).toBe(false);
         })
@@ -183,16 +183,16 @@ describe('alt.passaporte-procuracao', function() {
 
     it('deve tentar fazer a busca, mas servidor retorna erro', function() {
       var _token = 1;
-      var _idAssinante = 2;
+      var _idProcurador = 2;
       var _idProdutoProcurador = 3;
       var _idProdutoOutorgante = 4;
 
-      var _url = URL_COMPLETA_SEM_QS + '?token=1&idAssinante=2&idProdutoProcurador=3&idProdutoOutorgante=4';
+      var _url = URL_COMPLETA_SEM_QS + '?token=1&idProcurador=2&idProdutoProcurador=3&idProdutoOutorgante=4';
 
       _httpBackend.expectGET(_url).respond(400, {erro: 1});
 
       _AltPassaporteProcuracaoService
-        ._fazProcuracao(_token, _idAssinante, _idProdutoProcurador, _idProdutoOutorgante)
+        ._fazProcuracao(_token, _idProcurador, _idProdutoProcurador, _idProdutoOutorgante)
         .then(function() {
           expect(true).toBe(false);
         })
@@ -205,17 +205,17 @@ describe('alt.passaporte-procuracao', function() {
 
     it('deve fazer a busca corretamente', function() {
       var _token = 1;
-      var _idAssinante = 2;
+      var _idProcurador = 2;
       var _idProdutoProcurador = 3;
       var _idProdutoOutorgante = 4;
       var _usuarioResposta = {a: true};
 
-      var _url = URL_COMPLETA_SEM_QS + '?token=1&idAssinante=2&idProdutoProcurador=3&idProdutoOutorgante=4';
+      var _url = URL_COMPLETA_SEM_QS + '?token=1&idProcurador=2&idProdutoProcurador=3&idProdutoOutorgante=4';
 
       _httpBackend.expectGET(_url).respond(200, _usuarioResposta);
 
       _AltPassaporteProcuracaoService
-        ._fazProcuracao(_token, _idAssinante, _idProdutoProcurador, _idProdutoOutorgante)
+        ._fazProcuracao(_token, _idProcurador, _idProdutoProcurador, _idProdutoOutorgante)
         .then(function(usuario) {
           expect(usuario).toEqual(_usuarioResposta);
         })

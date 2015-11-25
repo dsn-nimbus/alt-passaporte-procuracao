@@ -3,8 +3,6 @@
 
   var ENDPOINT_PASSAPORTE = '/passaporte-rest-api/rest/authorization/procuracao';
 
-  //authorization/procuracao?token=lll&idAssinante=kkk&idProdutoProcurador=xxx&idProdutoOutorgante=ppp
-
   ng.module('alt.passaporte-procuracao', ['alt.passaporte-informacoes-autorizacao'])
     .config(['$httpProvider', function($httpProvider) {
       $httpProvider.defaults.withCredentials = true;
@@ -38,7 +36,7 @@
             return $q.reject(new TypeError('Id do produto outorgante não informado para fazer a procuração.'));
         }
 
-        var _queryString = '?token=' + token + '&idAssinante=' + idAssinante +
+        var _queryString = '?token=' + token + '&idProcurador=' + idAssinante +
                            '&idProdutoProcurador=' + idProdutoProcurador + '&idProdutoOutorgante=' + idProdutoOutorgante;
 
         var _url = URL_COMPLETA + _queryString;
